@@ -1,164 +1,200 @@
 <!DOCTYPE html>
 <html>
+    <head>
+    <meta name="google-site-verification" content="_2BgCbkAOUF_77rT5nv4lDAi9ZwQDdLegzhOLhP0eEo" />
+    <meta property="og:url" content="http://uadev.github.io/ua-car-tax-calculator/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Розрахунок вартості розмитнення авто з 1 липня 2016" />
+    <meta property="og:description" content="Дізнайся повну вартість розмитнення авто за новими ставками" />
+    <meta property="fb:app_id" content="280591868957803" />
+    <meta property="og:image" content="http://uadev.github.io/ua-car-tax-calculator/images/ua-calc-tax-logo.png" />
     <title>
         Розрахунок вартості розмитнення авто з 1 липня 2016
     </title>
-<!-- Special version of Bootstrap that only affects content wrapped in .bootstrap-iso -->
-<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" /> 
+    <!-- Special version of Bootstrap that only affects content wrapped in .bootstrap-iso -->
+    <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" /> 
 
-<!--Font Awesome (added because you use icons in your prepend/append)-->
-<link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
+    <!--Font Awesome (added because you use icons in your prepend/append)-->
+    <link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
 
-<!-- Inline CSS based on choices in "Settings" tab -->
-<style>.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}</style>
-<script>
-    function doRefresh() {
-        window.location.href = window.location.href.split('?_')[0] + '?_' + Date.now()
-    }
-    if (window.location.href.indexOf('?_') === -1) {
-        doRefresh();
-    }
-</script>
-
+    <!-- Inline CSS based on choices in "Settings" tab -->
+    <style>.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}</style>
+    <style>
+        .control-label {
+            cursor: pointer; 
+        }
+        #calculateButton {
+            vertical-align: top;
+        }
+    </style>
+    </head>
 <body>
 <div class="wrapper">
 <!-- HTML Form (wrapped in a .bootstrap-iso div) -->
-	<div class="bootstrap-iso">
-	 <div class="container-fluid">
-	  <div class="row">
-	   <div class="col-md-6 col-sm-6 col-xs-12">
-		<form method="post" id="calc-tax">
-		 <div class="form-group ">
-		  <label class="control-label requiredField">
-		   Тип двигуна
-		   <span class="asteriskField">
-			*
-		   </span>
-		  </label>
-		  <div class="">
-		   <div class="radio">
-			<label class="radio">
-			 <input name="engineType" type="radio" value="d"/>
-			 Дизель
-			</label>
-		   </div>
-		   <div class="radio">
-			<label class="radio">
-			 <input checked="true" name="engineType" type="radio" value="g"/>
-			 Бензин
-			</label>
-		   </div>
-		  </div>
-		 </div>
-		 <div class="form-group ">
-		  <label class="control-label requiredField" for="number">
-		   Об'єм, см3
-		   <span class="asteriskField">
-			*
-		   </span>
-		  </label>
-		  <div class="input-group">
-		   <div class="input-group-addon">
-			<i class="fa fa-car">
-			</i>
-		   </div>
-		   <input class="form-control" id="engineVolume" name="engineVolume" placeholder="1600" type="text"/>
-		  </div>
-		 </div>
-		 <div class="form-group ">
-		  <label class="control-label " for="price">
-		   Ціна, eur
-		  </label>
-		  <div class="input-group">
-		   <div class="input-group-addon">
-			<i class="fa fa-eur">
-			</i>
-		   </div>
-		   <input class="form-control" id="price" name="price" type="text" placeholder="1000"/>
-		  </div>
-		 </div>
-		 <div class="form-group ">
-		  <label class="control-label " for="textarea">
-		   Повна ціна, eur
-		  </label>
-		  <textarea class="form-control" cols="40" id="results" name="results" rows="5"></textarea>
-		 </div>
-			<div class="form-group">
-			 <div>
-			  <button class="btn btn-primary " name="submit" type="submit">
-			   Розрахувати
-			  </button>
-			 </div>
-			</div>
-		</form>
-	   </div>
-	  </div>
-	 </div>
+    <div class="bootstrap-iso">
+     <div class="container-fluid">
+      <div class="row">
+        <h3>Калькулятор розмитнення авто 2016 ~%)</h3>
+      </div>
+      <div class="row">
+       <div class="col-md-6 col-sm-6 col-xs-12">
+        <form method="post" id="calc-tax">
+         <div class="form-group ">
+          <label class="control-label requiredField">
+           Тип двигуна
+           <span class="asteriskField">
+            *
+           </span>
+          </label>
+          <div class="">
+           <div class="radio">
+            <label class="radio">
+             <input name="engineType" type="radio" value="d"/>
+             Дизель
+            </label>
+           </div>
+           <div class="radio">
+            <label class="radio">
+             <input checked="true" name="engineType" type="radio" value="g"/>
+             Бензин
+            </label>
+           </div>
+          </div>
+         </div>
+         <div class="form-group ">
+          <label class="control-label requiredField" for="engineVolume">
+           Об'єм, см³
+           <span class="asteriskField">
+            *
+           </span>
+          </label>
+          <div class="input-group">
+           <div class="input-group-addon">
+            <i class="fa fa-car">
+            </i>
+           </div>
+           <input required min="100" step="100" class="form-control" id="engineVolume" name="engineVolume" placeholder="" value="1200" type="number"/>
+          </div>
+         </div>
+         <div class="form-group ">
+          <label class="control-label " for="price">
+           Ціна, eur
+          </label>
+          <div class="input-group">
+           <div class="input-group-addon">
+            <i class="fa fa-eur">
+            </i>
+           </div>
+           <input class="form-control" id="price" name="price" type="number" min="0" placeholder="1000" required pattern="\d+(\.\d{2})" value="6600"/>
+          </div>
+         </div>
+         <div class="form-group ">
+          <label class="control-label " for="textarea">
+           Повна ціна, eur
+          </label>
+          <textarea class="form-control" cols="40" id="results" name="results" rows="5"></textarea>
+         </div>
+            <div class="form-group">
+             <div>
+              <button class="btn btn-primary " name="submit" type="submit" id="calculateButton">
+               Розрахувати
+              </button>
+<div
+  class="fb-like"
+  data-href="http://uadev.github.io/ua-car-tax-calculator"
+  data-share="true"
+  data-width="450"
+  data-show-faces="true">
+</div>
+             </div>
+            </div>
+        </form>
+       </div>
+      </div>
+     </div>
+<div>
+    <div class="fb-comments" data-href="http://uadev.github.io/ua-car-tax-calculator/" data-numposts="5"></div>
+</div>
       <footer>
           <p><small>View on <a href="https://github.com/uadev/ua-car-tax-calculator/">github</a> &mdash; by <a href="https://uadev.github.io">Uadev ~:)</a></small></p>
       </footer>
-	</div>
+    </div>
 </div>
 <script type="text/javascript">
-	var form = document.getElementById('calc-tax');
-	function defineTaxMultiplier(type, volume) {
-		if (type === 'g') {
-			if (volume <= 1000) {
-				return 0.102;
-			} else if ( volume <= 1500 ) {
-				return 0.063;
-			} else if (volume <= 2200) {
-				return 0.267;
-			} else if (volume <= 3000) {
-				return 0.276;
-			} else {
-				return 2.209;
-			}
-		} else if (type === 'd') {
-			if (volume <= 1500) {
-				return 0.103;
-			} else if (volume <= 2500) {
-				return 0.327;
-			} else {
-				return 2.209;
-			}
-		}
-	}
-	function doCalculate() {
-		console.log('calc')
-		var type = form.engineType.value;
-		if (!type) {
-			return false;
-		}
-		var price = Number(form.price.value);
-		var volume = Number(form.engineVolume.value);
-		var taxMultiplier = defineTaxMultiplier(type, volume);
-		console.log('start', price, type, volume, taxMultiplier, volume * taxMultiplier);
-		document.getElementById('results').value = `Розрахунок для  ${type==='d'?'дизель':'бензин'}, ${volume} см3, ціна ${price}
-Ставка Акцизу ${taxMultiplier}, акциз: ${volume} х ${taxMultiplier} = ${volume * taxMultiplier}, ПДВ 20%: ${price * 0.2}, Мито 10%: ${price * 0.1}
-Повна ціна: ${price + (taxMultiplier * volume) + (price * 0.2) + (price * 0.1)}€
-`;
-	}
-	form.addEventListener('change', doCalculate);
-	form.addEventListener('submit', function(e) {
-		e.preventDefault();
-		e.stopPropagation();
+    var form = document.getElementById('calc-tax');
+    function defineTaxMultiplier(type, volume) {
+        if (type === 'g') {
+            if (volume <= 1000) {
+                return 0.102;
+            } else if ( volume <= 1500 ) {
+                return 0.063;
+            } else if (volume <= 2200) {
+                return 0.267;
+            } else if (volume <= 3000) {
+                return 0.276;
+            } else {
+                return 2.209;
+            }
+        } else if (type === 'd') {
+            if (volume <= 1500) {
+                return 0.103;
+            } else if (volume <= 2500) {
+                return 0.327;
+            } else {
+                return 2.209;
+            }
+        }
+    }
+    function doCalculate() {
+        console.log('calc')
+        var type = form.engineType.value;
+        if (!type) {
+            return false;
+        }
+        var price = Number(form.price.value);
+        var volume = Number(form.engineVolume.value);
+        var taxMultiplier = defineTaxMultiplier(type, volume);
+        console.log('start', price, type, volume, taxMultiplier, volume * taxMultiplier);
+        document.getElementById('results').value = `Розрахунок для: ${type==='d'?'Дизель':'Бензин'}, ${volume} см³, ціна €${price}
+Ставка Акцизу  €${taxMultiplier}, акциз: ${volume} х ${taxMultiplier} = €${(volume * taxMultiplier).toFixed(2)}, ПДВ 20%: €${price * 0.2}, Мито 10%: €${price * 0.1}
+Повна ціна: €${(price + (taxMultiplier * volume) + (price * 0.2) + (price * 0.1)).toFixed(2)}`;
+    }
+    form.addEventListener('change', doCalculate);
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
 
-		doCalculate();
+        doCalculate();
 
-		return false;
-	});
+        return false;
+    });
 </script>
-    <script src="javascripts/scale.fix.js"></script>
-      <script type="text/javascript">
-        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-      </script>
-      <script type="text/javascript">
-        try {
-          var pageTracker = _gat._getTracker("UA-57538730-1");
-        pageTracker._trackPageview();
-        } catch(err) {}
-      </script>
+<script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+    try {
+      var pageTracker = _gat._getTracker("UA-57538730-1");
+      pageTracker._trackPageview();
+    } catch(err) {}
+</script>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '280591868957803',
+      xfbml      : true,
+      version    : 'v2.6'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
 </body>
 </html>
