@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
-
+    <title>
+        Розрахунок вартості розмитнення авто з 1 липня 2016
+    </title>
 <!-- Special version of Bootstrap that only affects content wrapped in .bootstrap-iso -->
 <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" /> 
 
@@ -9,8 +11,15 @@
 
 <!-- Inline CSS based on choices in "Settings" tab -->
 <style>.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}</style>
-<style>
-</style>
+<script>
+    function doRefresh() {
+        window.location.href = window.location.href.split('?_')[0] + '?_' + Date.now()
+    }
+    if (window.location.href.indexOf('?_') === -1) {
+        doRefresh();
+    }
+</script>
+
 <body>
 <div class="container">
 <!-- HTML Form (wrapped in a .bootstrap-iso div) -->
@@ -139,4 +148,3 @@
 </script>
 </body>
 </html>
-
