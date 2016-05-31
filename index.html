@@ -10,22 +10,22 @@
     <title>
         Розрахунок вартості розмитнення авто з 1 липня 2016
     </title>
-<!-- Special version of Bootstrap that only affects content wrapped in .bootstrap-iso -->
-<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" /> 
+    <!-- Special version of Bootstrap that only affects content wrapped in .bootstrap-iso -->
+    <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" /> 
 
-<!--Font Awesome (added because you use icons in your prepend/append)-->
-<link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
+    <!--Font Awesome (added because you use icons in your prepend/append)-->
+    <link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
 
-<!-- Inline CSS based on choices in "Settings" tab -->
-<style>.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}</style>
-<script>
-//    function doRefresh() {
-//        window.location.href = window.location.href.split('?_')[0] + '?_' + Date.now()
-//    }
-//    if (window.location.href.indexOf('?_') === -1) {
-//        doRefresh();
-//    }
-</script>
+    <!-- Inline CSS based on choices in "Settings" tab -->
+    <style>.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}</style>
+    <style>
+        .control-label {
+            cursor: pointer; 
+        }
+        #calculateButton {
+            vertical-align: top;
+        }
+    </style>
     </head>
 <body>
 <div class="wrapper">
@@ -61,8 +61,8 @@
           </div>
          </div>
          <div class="form-group ">
-          <label class="control-label requiredField" for="number">
-           Об'єм, см3
+          <label class="control-label requiredField" for="engineVolume">
+           Об'єм, см³
            <span class="asteriskField">
             *
            </span>
@@ -95,7 +95,7 @@
          </div>
             <div class="form-group">
              <div>
-              <button class="btn btn-primary " style="vertical-align: top" name="submit" type="submit">
+              <button class="btn btn-primary " name="submit" type="submit" id="calculateButton">
                Розрахувати
               </button>
 <div
@@ -154,10 +154,9 @@
         var volume = Number(form.engineVolume.value);
         var taxMultiplier = defineTaxMultiplier(type, volume);
         console.log('start', price, type, volume, taxMultiplier, volume * taxMultiplier);
-        document.getElementById('results').value = `Розрахунок для  ${type==='d'?'дизель':'бензин'}, ${volume} см3, ціна ${price}
-Ставка Акцизу ${taxMultiplier}, акциз: ${volume} х ${taxMultiplier} = ${(volume * taxMultiplier).toFixed(2)}, ПДВ 20%: ${price * 0.2}, Мито 10%: ${price * 0.1}
-Повна ціна: ${(price + (taxMultiplier * volume) + (price * 0.2) + (price * 0.1)).toFixed(2)} €
-`;
+        document.getElementById('results').value = `Розрахунок для: ${type==='d'?'Дизель':'Бензин'}, ${volume} см³, ціна €${price}
+Ставка Акцизу  €${taxMultiplier}, акциз: ${volume} х ${taxMultiplier} = €${(volume * taxMultiplier).toFixed(2)}, ПДВ 20%: €${price * 0.2}, Мито 10%: €${price * 0.1}
+Повна ціна: €${(price + (taxMultiplier * volume) + (price * 0.2) + (price * 0.1)).toFixed(2)}`;
     }
     form.addEventListener('change', doCalculate);
     form.addEventListener('submit', function(e) {
@@ -176,7 +175,7 @@
 <script type="text/javascript">
     try {
       var pageTracker = _gat._getTracker("UA-57538730-1");
-    pageTracker._trackPageview();
+      pageTracker._trackPageview();
     } catch(err) {}
 </script>
 <script>
