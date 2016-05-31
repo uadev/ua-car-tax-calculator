@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Special version of Bootstrap that only affects content wrapped in .bootstrap-iso -->
+<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" /> 
+
+<!--Font Awesome (added because you use icons in your prepend/append)-->
+<link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
+
+<!-- Inline CSS based on choices in "Settings" tab -->
+<style>.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}</style>
+<style>
+</style>
+<body>
+<div class="container">
+<!-- HTML Form (wrapped in a .bootstrap-iso div) -->
+	<div class="bootstrap-iso">
+	 <div class="container-fluid">
+	  <div class="row">
+	   <div class="col-md-6 col-sm-6 col-xs-12">
+		<form method="post" id="calc-tax">
+		 <div class="form-group ">
+		  <label class="control-label requiredField">
+		   Тип двигуна
+		   <span class="asteriskField">
+			*
+		   </span>
+		  </label>
+		  <div class="">
+		   <div class="radio">
+			<label class="radio">
+			 <input name="engineType" type="radio" value="d"/>
+			 Дизель
+			</label>
+		   </div>
+		   <div class="radio">
+			<label class="radio">
+			 <input checked="true" name="engineType" type="radio" value="g"/>
+			 Бензин
+			</label>
+		   </div>
+		  </div>
+		 </div>
+		 <div class="form-group ">
+		  <label class="control-label requiredField" for="number">
+		   Об'єм, см3
+		   <span class="asteriskField">
+			*
+		   </span>
+		  </label>
+		  <div class="input-group">
+		   <div class="input-group-addon">
+			<i class="fa fa-car">
+			</i>
+		   </div>
+		   <input class="form-control" id="engineVolume" name="engineVolume" placeholder="1600" type="text"/>
+		  </div>
+		 </div>
+		 <div class="form-group ">
+		  <label class="control-label " for="price">
+		   Ціна, eur
+		  </label>
+		  <div class="input-group">
+		   <div class="input-group-addon">
+			<i class="fa fa-eur">
+			</i>
+		   </div>
+		   <input class="form-control" id="price" name="price" type="text" placeholder="1000"/>
+		  </div>
+		 </div>
+		 <div class="form-group ">
+		  <label class="control-label " for="textarea">
+		   Повна ціна, eur
+		  </label>
+		  <textarea class="form-control" cols="40" id="results" name="results" rows="10"></textarea>
+		 </div>
+			<div class="form-group">
+			 <div>
+			  <button class="btn btn-primary " name="submit" type="submit">
+			   Розрахувати
+			  </button>
+			 </div>
+			</div>
+		</form>
+	   </div>
+	  </div>
+	 </div>
+	</div>
+</div>
+<script type="text/javascript">
+	var form = document.getElementById('calc-tax');
+	function defineTaxMultiplier(type, volume) {
+		if (type === 'g') {
+			if (volume <= 1000) {
+				return 0.102;
+			} else if ( volume <= 1500 ) {
+				return 0.063;
+			} else if (volume <= 2200) {
+				return 0.267;
+			} else if (volume <= 3000) {
+				return 0.276;
+			} else {
+				return 2.209;
+			}
+		} else if (type === 'd') {
+			if (volume <= 1500) {
+				return 0.103;
+			} else if (volume <= 2500) {
+				return 0.327;
+			} else {
+				return 2.209;
+			}
+		}
+	}
+	function doCalculate() {
+		console.log('calc')
+		var type = form.engineType.value;
+		if (!type) {
+			return false;
+		}
+		var price = Number(form.price.value);
+		var volume = Number(form.engineVolume.value);
+		var taxMultiplier = defineTaxMultiplier(type, volume);
+		console.log('start', price, type, volume, taxMultiplier, volume * taxMultiplier);
+		document.getElementById('results').value = `Розрахунок для  ${type==='d'?'дизель':'бензин'}, ${volume} см3, ціна ${price}
+Ставка Акцизу ${taxMultiplier}, акциз: ${volume} х ${taxMultiplier} = ${volume * taxMultiplier}, ПДВ 20%: ${price * 0.2}, Мито 10%: ${price * 0.1}
+Повна ціна: ${price + (taxMultiplier * volume) + (price * 0.2) + (price * 0.1)}€
+`;
+	}
+	form.addEventListener('change', doCalculate);
+	form.addEventListener('submit', function(e) {
+		e.preventDefault();
+		e.stopPropagation();
+
+		doCalculate();
+
+		return false;
+	});
+</script>
+</body>
+</html>
+
