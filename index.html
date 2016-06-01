@@ -154,10 +154,12 @@
         var price = Number(form.price.value);
         var volume = Number(form.engineVolume.value);
         var taxMultiplier = defineTaxMultiplier(type, volume);
-        console.log('start', price, type, volume, taxMultiplier, volume * taxMultiplier);
+        var exciseTax = volume * taxMultiplier; 
+        var tollTax = price * 0.1;
+        var vatTax = (price + tollTax + exciseTax) * 0.2;
         document.getElementById('results').value = `Розрахунок для: ${type==='d'?'Дизель':'Бензин'}, ${volume} см³, ціна €${price}
-Ставка Акцизу  €${taxMultiplier}, акциз: ${volume} х ${taxMultiplier} = €${(volume * taxMultiplier).toFixed(2)}, ПДВ 20%: €${price * 0.2}, Мито 10%: €${price * 0.1}
-Повна ціна: €${(price + (taxMultiplier * volume) + (price * 0.2) + (price * 0.1)).toFixed(2)}`;
+Ставка Акцизу  €${taxMultiplier}, акциз: ${volume} х ${taxMultiplier} = €${exciseTax.toFixed(2)}, ПДВ 20%: €${vatTax.toFixed(2)}, Мито 10%: €${tollTax.toFixed(2)}
+Повна ціна: €${(price + exciseTax + tollTax + vatTax).toFixed(2)}`;
     }
     form.addEventListener('change', doCalculate);
     form.addEventListener('submit', function(e) {
